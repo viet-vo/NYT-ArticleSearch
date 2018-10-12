@@ -1,13 +1,13 @@
 $(".btn").on("click", function (event) {
     event.preventDefault();
+
+    // retrieve user input
     var search = $("#userInput1").val().trim();
     var records = $("#userInput2").val().trim();
     var startYear = $("#userInput3").val().trim();
     var endYear = $("#userInput4").val().trim();
-    console.log(search);
     console.log(records);
-    console.log(startYear);
-    console.log(endYear);
+    // store API key and default url to add param too
     var apiKey = "3ba8c2a2ec9f4a0e9f4f511f3b88e7fe"
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     url += '?' + $.param({
@@ -18,13 +18,14 @@ $(".btn").on("click", function (event) {
         'end_date': endYear
     });
     console.log(url);
+    // retrieves the data from API
     $.ajax({
         url: url,
         method: 'GET',
-    }).then(function (response) {
-        console.log(response);
-        $("#addArt").append("hello");
-        $("#addArt").append('<div class="display-1">' + response.response + '</div>');
+    }).then(function (NYTData) {
+        for
+        $("#addArt").append('<div class="h2">' + "Title: " + NYTData.response.docs[0].headline.main + '</div>');
+        $("#addArt").append('<div class="h6">' + "Snippet: " + NYTData.response.docs[0].snippet + '</div>');
     }).fail(function (err) {
         throw err;
     });
